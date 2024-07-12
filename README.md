@@ -26,8 +26,7 @@
    cd fast-food
    ```
 
-3. There are two sub projects frontend and backend. Follow below instructions to setup each.
-    ### Frontend
+3. Project setup
     1. To setup frontend project. You have to navigate frontend directory
 
         ```shell
@@ -42,27 +41,4 @@
     3. To run frontend server
         ```shell
         npm start
-        ```
-    
-    ### Backend
-    1. To setup backend project. You have to navigate backend directory
-        
-        - If you're currently in frontend directory, then use below command
-            ```shell
-            cd ../backend
-            ```
-        
-        - If you're navigating from project root directory then.
-            ```shell
-            cd backend
-            ```
-        
-    2. Install project dependencies
-        ```shell
-        npm i
-        ```
-    
-    3. To run backend server
-        ```shell
-        npm run dev
         ```
