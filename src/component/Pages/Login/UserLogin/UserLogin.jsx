@@ -81,7 +81,7 @@ const UserLogin = () => {
     console.log("Request Body:", requestBody);
 
     try {
-      const response = await fetch("http://localhost:4000/api/users/login", {
+      const response = await fetch("http://localhost:4000/users/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -97,13 +97,13 @@ const UserLogin = () => {
         return;
       }
 
-      const { role, token } = data;
-
+      const { user, token } = data;
+      const { role } = user;
       localStorage.setItem("token", token);
 
       if (role === "user") {
         navigate("/userHomePage");
-      } else if (role === "restaurantUser") {
+      } else if (role === "businessUser") {
         navigate("/restaurantPage");
       } else if (role === "admin") {
         navigate("/adminHomePage");
@@ -156,15 +156,13 @@ const UserLogin = () => {
                 Login
               </button>
               <div className="links">
-                {/* <span className="business-signup-link">
+                <span className="business-signup-link">
                   <Link to="/adminLogin">Admin Login</Link>
                 </span>
-                <span className="business-signup-link">
-                  <Link to="/adminLogin">/</Link>
-                </span>
+                <span className="business-signup-link">/</span>
                 <span className="business-signup-link">
                   <Link to="/businessLogin">Business Login</Link>
-                </span> */}
+                </span>
               </div>
             </form>
           </div>

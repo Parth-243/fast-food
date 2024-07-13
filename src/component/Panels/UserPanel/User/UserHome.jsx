@@ -1,4 +1,5 @@
 import React from "react";
+import UserHeader from "../../../Layout/UserHeaders";
 import "./UserHome.css";
 
 function UserHome() {
@@ -41,41 +42,44 @@ function UserHome() {
   ];
 
   return (
-    <div className="food-page">
-      <div className="user-info">
-        <div className="user-name-box">
-          <h2>User Page</h2>
+    <>
+      <UserHeader />
+      <div className="food-page">
+        <div className="user-info">
+          <div className="user-name-box">
+            <h2>User Page</h2>
+          </div>
+          <div className="user-img-box">
+            <img src="digvijay.png" alt="User" />
+          </div>
         </div>
-        <div className="user-img-box">
-          <img src="digvijay.png" alt="User" />
+        <div className="foods-section">
+          <h2>Foods</h2>
+          <div className="food-items">
+            {foodItems.map((item, index) => (
+              <div className="food-item" key={index}>
+                <img src={item.imageUrl} alt={item.name} />
+                <p>{item.name}</p>
+                <p>{item.restaurant}</p>
+                <p>{item.price}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="restaurants-section">
+          <h2>Restaurants</h2>
+          <div className="restaurant-items">
+            {restaurants.map((item, index) => (
+              <div className="restaurant-item" key={index}>
+                <img src={item.imageUrl} alt={item.name} />
+                <p>{item.name}</p>
+                <p>{item.location}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="foods-section">
-        <h2>Foods</h2>
-        <div className="food-items">
-          {foodItems.map((item, index) => (
-            <div className="food-item" key={index}>
-              <img src={item.imageUrl} alt={item.name} />
-              <p>{item.name}</p>
-              <p>{item.restaurant}</p>
-              <p>{item.price}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="restaurants-section">
-        <h2>Restaurants</h2>
-        <div className="restaurant-items">
-          {restaurants.map((item, index) => (
-            <div className="restaurant-item" key={index}>
-              <img src={item.imageUrl} alt={item.name} />
-              <p>{item.name}</p>
-              <p>{item.location}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
 

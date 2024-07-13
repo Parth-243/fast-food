@@ -1,0 +1,75 @@
+/* .cart-history-page {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 20px;
+  width: 800px;
+}
+
+.cart-history-page h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.cart-history-page p {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.cart-history-page table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cart-history-page th,
+.cart-history-page td {
+  border: 1px solid #dee2e6;
+  padding: 10px;
+  text-align: center;
+}
+
+.cart-history-page .item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+} */
+
+.cart-history-page {
+  background-color: #f8f9fa; /* Light background color */
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 20px auto; /* Center align the cart history page */
+  max-width: 800px; /* Limit maximum width for better readability */
+}
+
+.cart-history-page h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  text-align: center; /* Center align the heading */
+}
+
+.cart-history-page table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff; /* White background for the table */
+  border-radius: 5px;
+  overflow: hidden; /* Hide overflow to prevent border overlap */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+.cart-history-page th,
+.cart-history-page td {
+  border: 1px solid #dee2e6;
+  padding: 10px;
+  text-align: center;
+}
+
+.cart-history-page .item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+}

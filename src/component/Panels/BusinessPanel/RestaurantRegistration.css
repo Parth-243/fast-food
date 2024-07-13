@@ -1,0 +1,110 @@
+/* RestaurantRegistration.css */
+
+.restaurant-registration-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.restaurant-registration-modal-content {
+  background-color: #fff;
+  width: 80%; /* Adjust width as needed */
+  max-width: 400px; /* Maximum width of the form */
+  height: 80%; /* Adjust height as needed */
+  max-height: 600px; /* Maximum height of the form */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: relative; /* Ensure content stays above the overlay */
+  z-index: 1100;
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.restaurant-registration-modal-content h2 {
+  font-size: 1.5rem; /* Adjust heading size */
+  margin-bottom: 15px;
+  color: #333;
+  text-align: center;
+}
+
+.restaurant-registration-modal-content form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.restaurant-registration-modal-content .form-group {
+  width: 100%;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.restaurant-registration-modal-content label {
+  font-size: 0.9rem; /* Adjust label size */
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.restaurant-registration-modal-content input[type="text"],
+.restaurant-registration-modal-content input[type="tel"],
+.restaurant-registration-modal-content input[type="time"],
+.restaurant-registration-modal-content input[type="file"],
+.restaurant-registration-modal-content input[type="number"],
+.restaurant-registration-modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.9rem; /* Adjust input font size */
+}
+
+.restaurant-registration-modal-content textarea {
+  resize: vertical;
+}
+
+.restaurant-registration-modal-content input:focus,
+.restaurant-registration-modal-content textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.restaurant-registration-modal-content .submit-button {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 1rem; /* Adjust button font size */
+  color: white;
+  background-color: #ff5733;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+.restaurant-registration-modal-content .submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Hide scrollbar */
+.restaurant-registration-modal-content::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar width */
+}
+
+/* Blurred background effect */
+body.restaurant-registration-blur {
+  overflow: hidden; /* Prevent scrolling of background content */
+}
+
+.restaurant-registration-blur-background {
+  filter: blur(5px); /* Adjust the blur effect as needed */
+}

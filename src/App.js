@@ -13,6 +13,12 @@ import AdminLogin from "./component/Pages/Login/AdminLogin/AdminLogin";
 import FoodPage from "./component/Pages/FoodPages/FoodPage";
 import UserHome from "./component/Panels/UserPanel/User/UserHome";
 import RestaurantHome from "./component/Panels/BusinessPanel/RestaurantHome";
+import FoodMenuList from "./component/Panels/BusinessPanel/FoodMenu/FoodMenuList";
+import FoodOrderingPage from "./component/Panels/UserPanel/UserFastFood/FoodOrderingPage";
+import UserProfile from "./component/Panels/UserPanel/UserProfile/UserProfile";
+import CartHistoryPage from "./component/Panels/UserPanel/UserAddToCart/CartHistoryPage";
+import OrderHistory from "./component/Panels/UserPanel/UserOrderHistory/OrderHistory";
+import BusinessProfile from "./component/Panels/BusinessPanel/BusinessProfile/BusinessProfile";
 
 const App = () => {
   return (
@@ -33,9 +39,14 @@ const App = () => {
           <Route path="/food" element={<FoodPage />} />
           <Route path="/userHomePage" element={<UserHome />} />
           <Route path="/restaurantPage" element={<RestaurantHome />} />
+          <Route path="/foodMenuList" element={<FoodMenuList />} />
+          <Route path="/fastFood" element={<FoodOrderingPage />} />
+          <Route path="/userProfile" element={<UserProfile />} />
+          <Route path="/userCartHistory" element={<CartHistoryPage />} />
+          <Route path="/userOrderHistory" element={<OrderHistory />} />
+          <Route path="/businessProfile" element={<BusinessProfile />} />
         </Routes>
       </BrowserRouter>
-      // {/* <RestaurantHome /> */}
     </>
   );
 };

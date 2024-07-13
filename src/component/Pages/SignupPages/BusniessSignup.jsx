@@ -234,24 +234,27 @@ const BusinessSignUpForm = () => {
     const email = form.email.value;
     const username = form.fullName.value;
     const password = form.password.value;
-    const role = form.role.value;
-    console.log(username, email, password, role);
+    const confirmPassword = form.confirmPassword.value;
+    console.log(username, email, password, confirmPassword);
 
     try {
-      const response = await fetch("http://localhost:4000/api/users/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ fullName: username, email, password, role }),
-      });
+      const response = await fetch(
+        "http://localhost:4000/business/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, email, password, confirmPassword }),
+        }
+      );
 
       const data = await response.json();
 
       if (response.ok) {
         console.log("User signed up successfully:", data);
         // Redirect or show success message
-        navigate("/businessLogin");
+        navigate("/login");
       } else {
         console.error("Error signing up:", data);
         // Show error message
@@ -306,7 +309,16 @@ const BusinessSignUpForm = () => {
                 required
               />
             </div>
-            <input type="hidden" name="role" value="restaurantUser" />
+            <div className="form-group">
+              <label htmlFor="password">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Re-enter Your Password"
+                required
+              />
+            </div>
             <button type="submit" className="sign-up-button">
               Sign Up
             </button>

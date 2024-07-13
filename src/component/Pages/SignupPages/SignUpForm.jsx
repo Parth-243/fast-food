@@ -19,20 +19,23 @@ const SignUpForm = () => {
     console.log(username, email, password, role);
 
     try {
-      const response = await fetch("http://localhost:4000/api/users/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ fullName: username, email, password, role }),
-      });
+      const response = await fetch(
+        "http://localhost:4000/users/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ fullName: username, email, password, role }),
+        }
+      );
 
       const data = await response.json();
 
       if (response.ok) {
         console.log("User signed up successfully:", data);
         // Redirect or show success message
-        navigate("/businessLogin");
+        navigate("/login");
       } else {
         console.error("Error signing up:", data);
         // Show error message
