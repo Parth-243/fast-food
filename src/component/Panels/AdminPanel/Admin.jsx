@@ -9,7 +9,6 @@ const Admin = () => {
   const [foodCategory, setFoodCategory] = useState("");
   const [foodDescription, setFoodDescription] = useState("");
   const [foodImage, setFoodImage] = useState(null);
-  const token = "your-jwt-token-here"; // Replace with your actual token
 
   useEffect(() => {
     fetchInitialData();
@@ -17,8 +16,52 @@ const Admin = () => {
 
   const fetchInitialData = async () => {
     try {
-      const response = await fetch("http://localhost:4000/admin/food-categories", {
-        method: "GET",
+      const [categoriesResponse, customersResponse, restaurantsResponse] = await Promise.all([
+        fetch("http://localhost:4000/admin/food-categories", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }),
+        fetch("http://localhost:4000/admin/users/customers", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }),
+        fetch("http://localhost:4000/admin/restaurants", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }),
+      ]);
+
+      if (!categoriesResponse.ok || !customersResponse.ok || !restaurantsResponse.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const [categoriesData, customersData, restaurantsData] = await Promise.all([
+        categoriesResponse.json(),
+        customersResponse.json(),
+        restaurantsResponse.json(),
+      ]);
+
+      setFoodCategories(categoriesData);
+      setCustomers(customersData);
+      setRestaurants(restaurantsData);
+    } catch (error) {
+      console.error("Error fetching initial data", error);
+    }
+  };
+
+  const handleRemoveRestaurant = async (restaurantId) => {
+    try {
+      const response = await fetch(`http://localhost:4000/admin/restaurants/${restaurantId}`, {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
@@ -29,19 +72,30 @@ const Admin = () => {
         throw new Error("Network response was not ok");
       }
 
-      const data = await response.json();
-      setFoodCategories(data);
+      setRestaurants(restaurants.filter((restaurant) => restaurant._id !== restaurantId));
     } catch (error) {
-      console.error("Error fetching food categories", error);
+      console.error("Error removing restaurant", error);
     }
   };
 
-  const handleRemoveRestaurant = (restaurantName) => {
-    alert(`Remove restaurant: ${restaurantName}`);
-  };
+  const handleRemoveCustomer = async (customerId) => {
+    try {
+      const response = await fetch(`http://localhost:4000/admin/users/customers/${customerId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
 
-  const handleRemoveCustomer = (customerName) => {
-    alert(`Remove customer: ${customerName}`);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      setCustomers(customers.filter((customer) => customer._id !== customerId));
+    } catch (error) {
+      console.error("Error removing customer", error);
+    }
   };
 
   const handleRemoveCategory = async (categoryId) => {
@@ -73,7 +127,6 @@ const Admin = () => {
         const response = await fetch(`http://localhost:4000/admin/food-categories/${category._id}`, {
           method: "PUT",
           headers: {
-            "Content-Type": "application/json",
             "Content-Type": "application/json",
           },
           credentials: "include",
@@ -123,7 +176,7 @@ const Admin = () => {
       const uploadResponse = await fetch(`http://localhost:4000/admin/food-categories/picture/${newCategory._id}`, {
         method: "POST",
         headers: {
-          // "Content-Type": "application/json",
+          // Do not set Content-Type when using FormData
         },
         credentials: "include",
         body: formData,
@@ -134,7 +187,7 @@ const Admin = () => {
       }
 
       const updatedCategory = await uploadResponse.json();
-      setFoodCategories([...foodCategories, newCategory]);
+      setFoodCategories([...foodCategories, updatedCategory]);
       setFoodCategory("");
       setFoodDescription("");
       setFoodImage(null);
@@ -237,29 +290,33 @@ const Admin = () => {
             <thead>
               <tr>
                 <th>Image</th>
-                <th>Name</th>
+                <th>Username</th>
                 <th>Email</th>
                 <th>Phone Number</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {customers.map((customer, index) => (
-                <tr key={index}>
+              {customers.map((customer) => (
+                <tr key={customer._id}>
                   <td>
-                    <img
-                      src={customer.image}
-                      alt={customer.name}
-                      className="table-image"
-                    />
+                    {customer.picture ? (
+                      <img
+                        src={customer.picture}
+                        alt={customer.username}
+                        className="table-image"
+                      />
+                    ) : (
+                      <div className="placeholder-image">No Image</div>
+                    )}
                   </td>
-                  <td>{customer.name}</td>
+                  <td>{customer.username}</td>
                   <td>{customer.email}</td>
-                  <td>{customer.phone}</td>
+                  <td>{customer.mobile || "N/A"}</td>
                   <td>
                     <button
                       className="remove-button"
-                      onClick={() => handleRemoveCustomer(customer.name)}
+                      onClick={() => handleRemoveCustomer(customer._id)}
                     >
                       Remove Customer
                     </button>
@@ -276,28 +333,32 @@ const Admin = () => {
               <tr>
                 <th>Image</th>
                 <th>Name</th>
-                <th>Email</th>
+                <th>Address</th>
                 <th>Phone Number</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {restaurants.map((restaurant, index) => (
-                <tr key={index}>
+              {restaurants.map((restaurant) => (
+                <tr key={restaurant._id}>
                   <td>
-                    <img
-                      src={restaurant.image}
-                      alt={restaurant.name}
-                      className="table-image"
-                    />
+                    {restaurant.picture ? (
+                      <img
+                        src={restaurant.picture}
+                        alt={restaurant.name}
+                        className="table-image"
+                      />
+                    ) : (
+                      <div className="placeholder-image">No Image</div>
+                    )}
                   </td>
                   <td>{restaurant.name}</td>
-                  <td>{restaurant.email}</td>
-                  <td>{restaurant.phone}</td>
+                  <td>{restaurant.address}, {restaurant.city}, {restaurant.state}, {restaurant.postalCode}</td>
+                  <td>{restaurant.mobile}</td>
                   <td>
                     <button
                       className="remove-button"
-                      onClick={() => handleRemoveRestaurant(restaurant.name)}
+                      onClick={() => handleRemoveRestaurant(restaurant._id)}
                     >
                       Remove Restaurant
                     </button>
