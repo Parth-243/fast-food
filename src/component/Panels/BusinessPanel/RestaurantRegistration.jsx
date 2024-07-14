@@ -3,10 +3,9 @@ import "./RestaurantRegistration.css";
 
 const RestaurantRegistration = ({ onSubmit }) => {
   const [restaurantName, setRestaurantName] = useState("");
+  const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
-  const [restaurantLicense, setRestaurantLicense] = useState("");
-  const [ownerName, setOwnerName] = useState("");
   const [openingTime, setOpeningTime] = useState("");
   const [closingTime, setClosingTime] = useState("");
   const [state, setState] = useState("");
@@ -16,16 +15,15 @@ const RestaurantRegistration = ({ onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit({
-      restaurantName,
+      name: restaurantName,
+      description,
+      mobile: phoneNo,
+      opensAt: openingTime,
+      closesAt: closingTime,
       address,
-      phoneNo,
-      restaurantLicense,
-      ownerName,
-      openingTime,
-      closingTime,
       state,
       city,
-      pincode,
+      postalCode: pincode,
     });
   };
 
@@ -45,6 +43,15 @@ const RestaurantRegistration = ({ onSubmit }) => {
             />
           </div>
           <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            ></textarea>
+          </div>
+          <div className="form-group">
             <label htmlFor="address">Address</label>
             <input
               type="text"
@@ -62,26 +69,6 @@ const RestaurantRegistration = ({ onSubmit }) => {
               value={phoneNo}
               onChange={(e) => setPhoneNo(e.target.value)}
               pattern="[0-9]{10}"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="restaurantLicense">Restaurant License</label>
-            <input
-              type="text"
-              id="restaurantLicense"
-              value={restaurantLicense}
-              onChange={(e) => setRestaurantLicense(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="ownerName">Owner Name</label>
-            <input
-              type="text"
-              id="ownerName"
-              value={ownerName}
-              onChange={(e) => setOwnerName(e.target.value)}
               required
             />
           </div>
