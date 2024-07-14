@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./restaurantHeader.css";
 
 const RestaurantHeader = () => {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -12,6 +13,11 @@ const RestaurantHeader = () => {
           method: "GET",
           credentials: "include", // Ensure cookies are included in the request
         });
+
+        if (response.status === 401) {
+          navigate("/businessLogin");
+          return;
+        }
 
         if (!response.ok) {
           throw new Error("Failed to fetch user details");
@@ -25,7 +31,25 @@ const RestaurantHeader = () => {
     };
 
     fetchUser();
-  }, []);
+  }, [navigate]);
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/business/auth/logout", {
+        method: "POST",
+        credentials: "include", // Ensure cookies are included in the request
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to log out");
+      }
+
+      setUser(null);
+      navigate("/businessLogin"); // Redirect to the login page after logout
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
 
   return (
     <header className="header">
@@ -38,7 +62,12 @@ const RestaurantHeader = () => {
           <Link to="/foodMenuList">Food Menu</Link>
           <Link to="">Payment</Link>
           {user ? (
-            <Link to="/businessProfile">{user.username}</Link>
+            <>
+              <Link to="/businessProfile">{user.username}</Link>
+              <button onClick={handleLogout} className="logout-button">
+                Logout
+              </button>
+            </>
           ) : (
             <Link to="/businessProfile">Profile</Link>
           )}

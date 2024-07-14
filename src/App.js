@@ -21,6 +21,7 @@ import BusinessProfile from "./component/Panels/BusinessPanel/BusinessProfile/Bu
 import FastFood from "./component/Pages/FoodPages/FastFood";
 import Restaurant from "./component/Pages/RestaurantPage/Restaurant";
 import Admin from "./component/Panels/AdminPanel/Admin";
+import RestaurantMenu from "./component/Panels/BusinessPanel/RestaurantMenu";
 // import AdminPannel from "./component/Panels/AdminPanel/AdminPannel";
 
 const App = () => {
@@ -43,6 +44,7 @@ const App = () => {
           </Route>
           <Route path="/userHomePage" element={<UserHome />} />
           <Route path="/restaurantPage" element={<RestaurantHome />} />
+          <Route path="/restaurant/:id" element={<RestaurantMenu />} />
           <Route path="/foodMenuList" element={<FoodMenuList />} />
           <Route path="/fastFood" element={<FoodOrderingPage />} />
           <Route path="/userProfile" element={<UserProfile />} />

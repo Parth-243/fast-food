@@ -114,3 +114,17 @@
     width: auto;
   }
 }
+
+.logout-button {
+  background: none;
+  border: none;
+  color: blue;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1rem;
+  text-decoration: underline;
+}
+
+.logout-button:hover {
+  color: darkblue;
+}
