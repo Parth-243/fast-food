@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Admin.css";
-import AdminHeader from "../../Layout/adminHeader";
-const restaurants = [
+import AdminHeader from "../../Layout/AdminHeader";
+const initialRestaurants = [
   {
     name: "Alfresco Seating",
     image: "alfresco-seating.jpg",
@@ -132,7 +132,7 @@ function Admin() {
               </button>
             </form>
             {foodCategories.length > 0 && (
-              <table className="admin-table">
+              <table className="admin-table1">
                 <thead>
                   <tr>
                     <th>Image</th>
