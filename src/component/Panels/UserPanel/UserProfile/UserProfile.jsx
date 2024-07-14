@@ -1,110 +1,111 @@
-// import React, { useState } from 'react';
-// import './UserProfile.css';
-
-// const UserProfile = () => {
-//   const [profilePicture, setProfilePicture] = useState('your-profile-picture-url.jpg');
-
-//   const handleProfilePictureChange = (event) => {
-//     const file = event.target.files[0];
-//     if (file) {
-//       const reader = new FileReader();
-//       reader.onloadend = () => {
-//         setProfilePicture(reader.result);
-//       };
-//       reader.readAsDataURL(file);
-//     }
-//   };
-
-//   return (
-//     <div className="profile-page">
-//       <div className="profile-card">
-//         <div className="profile-header">
-//           <img src={profilePicture} alt="Profile" className="profile-picture" />
-//           <input type="file" accept="image/*" onChange={handleProfilePictureChange} className="file-input" />
-//         </div>
-//         <form className="profile-form">
-//           <label>
-//             User Name:
-//             <input type="text" name="username" required />
-//           </label>
-//           <label>
-//             Phone Number:
-//             <input type="tel" name="phone" pattern="[0-9]{10}" maxLength="10" required />
-//           </label>
-//           <label>
-//             Address:
-//             <textarea name="address" required></textarea>
-//           </label>
-//           <label>
-//             Description:
-//             <textarea name="description" required></textarea>
-//           </label>
-//           <label>
-//             Reset Password:
-//             <input type="password" name="password" required />
-//           </label>
-//           <label>
-//             Email ID:
-//             <input type="email" name="email" required />
-//           </label>
-//           <button type="submit">Save</button>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default UserProfile;
-
-// UserProfile.jsx
-// UserProfile.jsx
 import React, { useState, useEffect } from "react";
 import "./UserProfile.css";
 import UserHeader from "../../../Layout/UserHeaders";
 
 const UserProfile = () => {
-  const [profilePicture, setProfilePicture] = useState(
-    "your-profile-picture-url.jpg"
-  );
+  const [profilePicture, setProfilePicture] = useState("");
   const [formData, setFormData] = useState({
     username: "",
     phone: "",
     address: "",
-    description: "",
-    password: "",
+    state: "",
+    city: "",
+    postalCode: "",
+    dob: "",
+    gender: "",
+    firstName: "",
+    lastName: "",
     email: "",
   });
 
   useEffect(() => {
-    // Simulated data fetching from backend
-    // Replace with actual API call to fetch user data
-    const fetchData = async () => {
-      try {
-        // Example of fetched data
-        const userData = {
-          username: "JohnDoe",
-          phone: "1234567890",
-          address: "123 Street, City",
-          description: "Lorem ipsum dolor sit amet.",
-          email: "johndoe@example.com",
-        };
-        setFormData(userData);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
-    fetchData();
+    fetchUserData();
+    fetchUserProfile();
   }, []);
 
-  const handleProfilePictureChange = (event) => {
+  const fetchUserData = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/users/auth/user", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const userData = await response.json();
+      setFormData((prevData) => ({
+        ...prevData,
+        username: userData.username,
+        email: userData.email,
+      }));
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+
+  const fetchUserProfile = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/users/profile", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const profileData = await response.json();
+      setProfilePicture(profileData.picture);
+      setFormData((prevData) => ({
+        ...prevData,
+        phone: profileData.mobile,
+        address: profileData.address,
+        state: profileData.state,
+        city: profileData.city,
+        postalCode: profileData.postalCode,
+        dob: profileData.dob.split('T')[0],
+        gender: profileData.gender,
+        firstName: profileData.firstName,
+        lastName: profileData.lastName,
+      }));
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+    }
+  };
+
+  const handleProfilePictureChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfilePicture(reader.result);
-      };
-      reader.readAsDataURL(file);
+      const formData = new FormData();
+      formData.append("file", file);
+
+      try {
+        const response = await fetch("http://localhost:4000/users/profile/picture", {
+          method: "POST",
+          headers: {
+            // Do not set Content-Type when using FormData
+          },
+          credentials: "include",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+        setProfilePicture(data.picture);
+      } catch (error) {
+        console.error("Error uploading profile picture:", error);
+      }
     }
   };
 
@@ -116,12 +117,41 @@ const UserProfile = () => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Simulated update API call
-    console.log("Updated user data:", formData);
-    // Replace with actual API call to update user data
-    // Example: updateUserData(formData);
+    const { phone, address, state, city, postalCode, dob, gender, firstName, lastName } = formData;
+
+    const profileData = {
+      firstName,
+      lastName,
+      dob,
+      gender,
+      mobile: phone,
+      address,
+      state,
+      city,
+      postalCode,
+    };
+
+    try {
+      const response = await fetch("http://localhost:4000/users/profile", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(profileData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const updatedProfile = await response.json();
+      console.log("Updated profile data:", updatedProfile);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
   };
 
   return (
@@ -151,7 +181,7 @@ const UserProfile = () => {
                 value={formData.username}
                 onChange={handleInputChange}
                 placeholder="Enter your username"
-                required
+                readOnly
               />
             </label>
             <label>
@@ -178,23 +208,81 @@ const UserProfile = () => {
               ></textarea>
             </label>
             <label>
-              Description:
-              <textarea
-                name="description"
-                value={formData.description}
+              State:
+              <input
+                type="text"
+                name="state"
+                value={formData.state}
                 onChange={handleInputChange}
-                placeholder="Enter your description"
+                placeholder="Enter your state"
                 required
-              ></textarea>
+              />
             </label>
             <label>
-              Reset Password:
+              City:
               <input
-                type="password"
-                name="password"
-                value={formData.password}
+                type="text"
+                name="city"
+                value={formData.city}
                 onChange={handleInputChange}
-                placeholder="Enter your new password"
+                placeholder="Enter your city"
+                required
+              />
+            </label>
+            <label>
+              Postal Code:
+              <input
+                type="text"
+                name="postalCode"
+                value={formData.postalCode}
+                onChange={handleInputChange}
+                placeholder="Enter your postal code"
+                required
+              />
+            </label>
+            <label>
+              Date of Birth:
+              <input
+                type="date"
+                name="dob"
+                value={formData.dob}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+            <label>
+              Gender:
+              <select
+                name="gender"
+                value={formData.gender}
+                onChange={handleInputChange}
+                required
+              >
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+            <label>
+              First Name:
+              <input
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleInputChange}
+                placeholder="Enter your first name"
+                required
+              />
+            </label>
+            <label>
+              Last Name:
+              <input
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleInputChange}
+                placeholder="Enter your last name"
                 required
               />
             </label>
@@ -206,7 +294,7 @@ const UserProfile = () => {
                 value={formData.email}
                 onChange={handleInputChange}
                 placeholder="Enter your email"
-                required
+                readOnly
               />
             </label>
             <button type="submit">Save</button>
