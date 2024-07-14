@@ -1,68 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Admin.css";
 import AdminHeader from "../../Layout/adminHeader";
-const initialRestaurants = [
-  {
-    name: "Alfresco Seating",
-    image: "alfresco-seating.jpg",
-    email: "alfresco@example.com",
-    phone: "123-456-7890",
-  },
-  {
-    name: "Aravali Rooftop Restaurant",
-    image: "aravali-rooftop-restaurant.jpg",
-    email: "aravali@example.com",
-    phone: "234-567-8901",
-  },
-  {
-    name: "Lily Restaurant",
-    image: "lily.jpg",
-    email: "lily@example.com",
-    phone: "345-678-9012",
-  },
-  {
-    name: "Medi Pe Cafe",
-    image: "medi_pe_cafe.jpg",
-    email: "medi@example.com",
-    phone: "456-789-0123",
-  },
-  // Add more restaurant data here...
-];
 
-const initialCustomers = [
-  {
-    name: "John Doe",
-    image: "customer1.jpg",
-    email: "john.doe@example.com",
-    phone: "555-555-5555",
-  },
-  {
-    name: "Jane Smith",
-    image: "customer2.jpg",
-    email: "jane.smith@example.com",
-    phone: "666-666-6666",
-  },
-  {
-    name: "Alice Johnson",
-    image: "customer3.jpg",
-    email: "alice.johnson@example.com",
-    phone: "777-777-7777",
-  },
-  {
-    name: "Bob Brown",
-    image: "customer4.jpg",
-    email: "bob.brown@example.com",
-    phone: "888-888-8888",
-  },
-  // Add more customer data here...
-];
-
-function Admin() {
-  const [restaurants, setRestaurants] = useState(initialRestaurants);
-  const [customers, setCustomers] = useState(initialCustomers);
+const Admin = () => {
+  const [restaurants, setRestaurants] = useState([]);
+  const [customers, setCustomers] = useState([]);
   const [foodCategories, setFoodCategories] = useState([]);
   const [foodCategory, setFoodCategory] = useState("");
+  const [foodDescription, setFoodDescription] = useState("");
   const [foodImage, setFoodImage] = useState(null);
+  const token = "your-jwt-token-here"; // Replace with your actual token
+
+  useEffect(() => {
+    fetchInitialData();
+  }, []);
+
+  const fetchInitialData = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/admin/food-categories", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      setFoodCategories(data);
+    } catch (error) {
+      console.error("Error fetching food categories", error);
+    }
+  };
 
   const handleRemoveRestaurant = (restaurantName) => {
     alert(`Remove restaurant: ${restaurantName}`);
@@ -72,29 +44,103 @@ function Admin() {
     alert(`Remove customer: ${customerName}`);
   };
 
-  const handleRemoveCategory = (categoryName) => {
-    setFoodCategories(
-      foodCategories.filter((category) => category.name !== categoryName)
-    );
+  const handleRemoveCategory = async (categoryId) => {
+    try {
+      const response = await fetch(`http://localhost:4000/admin/food-categories/${categoryId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      setFoodCategories(foodCategories.filter((category) => category._id !== categoryId));
+    } catch (error) {
+      console.error("Error removing category", error);
+    }
   };
 
-  const handleEditCategory = (categoryName) => {
-    alert(`Edit category: ${categoryName}`);
+  const handleEditCategory = async (category) => {
+    const updatedName = prompt("Enter new name:", category.name);
+    const updatedDescription = prompt("Enter new description:", category.description);
+
+    if (updatedName && updatedDescription) {
+      try {
+        const response = await fetch(`http://localhost:4000/admin/food-categories/${category._id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ name: updatedName, description: updatedDescription }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const updatedCategory = await response.json();
+        const updatedCategories = foodCategories.map((cat) =>
+          cat._id === category._id ? updatedCategory : cat
+        );
+        setFoodCategories(updatedCategories);
+      } catch (error) {
+        console.error("Error editing category", error);
+      }
+    }
   };
 
-  const handleAddCategory = (event) => {
+  const handleAddCategory = async (event) => {
     event.preventDefault();
-    if (!foodCategory || !foodImage) {
-      alert("Please enter a category name and upload an image.");
+    if (!foodCategory || !foodImage || !foodDescription) {
+      alert("Please enter a category name, description, and upload an image.");
       return;
     }
-    const newCategory = {
-      name: foodCategory,
-      image: URL.createObjectURL(foodImage),
-    };
-    setFoodCategories([...foodCategories, newCategory]);
-    setFoodCategory("");
-    setFoodImage(null);
+    try {
+      const response = await fetch("http://localhost:4000/admin/food-categories", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ name: foodCategory, description: foodDescription }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const newCategory = await response.json();
+
+      const formData = new FormData();
+      formData.append("file", foodImage);
+
+      const uploadResponse = await fetch(`http://localhost:4000/admin/food-categories/picture/${newCategory._id}`, {
+        method: "POST",
+        headers: {
+          // "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: formData,
+      });
+
+      if (!uploadResponse.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const updatedCategory = await uploadResponse.json();
+      setFoodCategories([...foodCategories, newCategory]);
+      setFoodCategory("");
+      setFoodDescription("");
+      setFoodImage(null);
+    } catch (error) {
+      console.error("Error adding category", error);
+    }
   };
 
   return (
@@ -113,6 +159,17 @@ function Admin() {
                   name="category"
                   value={foodCategory}
                   onChange={(e) => setFoodCategory(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="description">Category Description</label>
+                <input
+                  type="text"
+                  id="description"
+                  name="description"
+                  value={foodDescription}
+                  onChange={(e) => setFoodDescription(e.target.value)}
                   required
                 />
               </div>
@@ -137,30 +194,32 @@ function Admin() {
                   <tr>
                     <th>Image</th>
                     <th>Name</th>
+                    <th>Description</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {foodCategories.map((category, index) => (
-                    <tr key={index}>
+                  {foodCategories.map((category) => (
+                    <tr key={category._id}>
                       <td>
                         <img
-                          src={category.image}
+                          src={category.picture}
                           alt={category.name}
                           className="table-image"
                         />
                       </td>
                       <td>{category.name}</td>
+                      <td>{category.description}</td>
                       <td>
                         <button
                           className="edit-button"
-                          onClick={() => handleEditCategory(category.name)}
+                          onClick={() => handleEditCategory(category)}
                         >
                           Edit
                         </button>
                         <button
                           className="remove-button"
-                          onClick={() => handleRemoveCategory(category.name)}
+                          onClick={() => handleRemoveCategory(category._id)}
                         >
                           Remove
                         </button>
@@ -251,6 +310,6 @@ function Admin() {
       </div>
     </>
   );
-}
+};
 
 export default Admin;
