@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./RestaurantHome.module.css"; // Import CSS module
 import RestaurantHeader from "../../Layout/restaurantHeader";
+import RestaurantRegistration from "./RestaurantRegistration";
 
 const RestaurantHome = () => {
   const [foodItem, setFoodItem] = useState("");
@@ -30,6 +31,7 @@ const RestaurantHome = () => {
   return (
     <div className={styles["restaurant-page"]}>
       <RestaurantHeader />
+      <RestaurantRegistration />
       <div className={styles["restaurant-home"]}>
         <h1 className={styles.title}>Welcome to Food Delight</h1>
         <form className={styles["food-menu-form"]} onSubmit={handleSubmit}>
