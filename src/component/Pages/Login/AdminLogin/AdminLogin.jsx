@@ -127,6 +127,7 @@ const AdminLogin = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(requestBody),
+        credentials: "include", // Ensure cookies are included in the request
       });
 
       const data = await response.json();
@@ -137,9 +138,7 @@ const AdminLogin = () => {
         return;
       }
 
-      const { user, token } = data;
-      const { role } = user;
-      localStorage.setItem("token", token);
+      const { role } = data;
 
       if (role === "user") {
         navigate("/userHomePage");

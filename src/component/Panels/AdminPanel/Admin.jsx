@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Admin.css";
-import AdminHeader from "../../Layout/AdminHeader";
+import AdminHeader from "../../Layout/adminHeader";
 const initialRestaurants = [
   {
     name: "Alfresco Seating",
