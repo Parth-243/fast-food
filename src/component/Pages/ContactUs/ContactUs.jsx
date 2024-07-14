@@ -8,7 +8,9 @@ function ContactUs() {
         <h1 className="contact-title">Get in Touch</h1>
         <p className="contact-description">
           We'd love to hear from you! Fill out the form below and our team will
-          get back to you as soon as possible.
+          get back to you as soon as possible. Whether you have questions,
+          feedback, or need assistance, we're here to help. Your satisfaction is
+          our priority, and we look forward to connecting with you soon!
         </p>
       </section>
 
@@ -32,10 +34,13 @@ function ContactUs() {
                 required
               ></textarea>
             </div>
-            <button type="submit" className="submit-button">
+            <button type="submit" className="submit-buttons">
               Send Message
             </button>
           </form>
+        </div>
+        <div className="contact-img">
+          <img src="contact-us.png" />
         </div>
       </section>
 
@@ -44,12 +49,12 @@ function ContactUs() {
         <div className="info-container">
           <div className="info-item">
             <h3>Address</h3>
-            <p>123 Foodie Lane, Flavor Town, TX 12345</p>
+            <p>123 FoodExpress, Royal town, new Street Mumbai, 400001</p>
           </div>
           <div className="info-item">
             <h3>Email</h3>
             <p>
-              <a href="mailto:info@yourcompany.com">info@yourcompany.com</a>
+              <a href="mailto:info@yourcompany.com">FoodExpress24@gmail.com</a>
             </p>
           </div>
           <div className="info-item">

@@ -7,12 +7,14 @@ function Abouts() {
       <section className="about-section">
         <div className="about-content">
           <h1 className="about-title">
-            We Champion Restaurants from Coast to Coast
+            FoodExpress | Your Ultimate Destination for Quick and Fresh Meal
+            Deliveries
           </h1>
           <p className="about-description">
-            Restaurants sit at the heart of communities. It’s our mission to
-            strengthen their roots, deepen their connections, and increase the
-            positive impact they have on people and society.
+            FoodExpress delivers your favorite fast food quickly and fresh.
+            Restaurants can partner with us to expand their reach and bring
+            delicious meals to customers' doorsteps. Enjoy convenience and
+            quality with every order!
           </p>
           <button className="impact-button">View Our Impact</button>
         </div>
@@ -38,19 +40,19 @@ function Abouts() {
         <div className="image-grid">
           <div className="image-card">
             <img src="dummy-img.jpg" alt="Team Member 1" />
-            <p className="team-member-name">Team Member 1</p>
+            <p className="team-member-name">Parth</p>
           </div>
           <div className="image-card">
             <img src="dummy-img.jpg" alt="Team Member 2" />
-            <p className="team-member-name">Team Member 2</p>
+            <p className="team-member-name">Chinmay</p>
           </div>
           <div className="image-card">
             <img src="dummy-img.jpg" alt="Team Member 3" />
-            <p className="team-member-name">Team Member 3</p>
+            <p className="team-member-name">Aditya</p>
           </div>
           <div className="image-card">
             <img src="dummy-img.jpg" alt="Team Member 4" />
-            <p className="team-member-name">Team Member 4</p>
+            <p className="team-member-name">Daksh</p>
           </div>
         </div>
       </section>

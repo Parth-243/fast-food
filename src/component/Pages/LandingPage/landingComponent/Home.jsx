@@ -4,7 +4,12 @@ import BannerImage from "../../../../Assets/Landing_page_pizza.png";
 import { FiArrowRight } from "react-icons/fi";
 import "../LandingPages.css";
 
+import { Link } from "react-router-dom";
+
 const Home = () => {
+  const handleOrderClick = () => {
+    alert("Please login/sign up");
+  };
   return (
     <div className="home-container">
       {/* <Navbar /> */}
@@ -17,12 +22,13 @@ const Home = () => {
             Your Favourite Food Delivered Hot & Fresh
           </h1>
           <p className="primary-text">
-            Healthy switcher chefs do all the prep work, like peeding, chopping
-            & marinating, so you can cook a fresh food.
+            Craving something delicious? Get your favorite food delivered hot
+            and fresh, right to your doorstep!
           </p>
-          <button className="secondary-button">
-            Order Now <FiArrowRight />{" "}
-          </button>
+          <Link to="/login" className="secondary-button">
+            {" "}
+            Order Now <FiArrowRight />
+          </Link>
         </div>
         <div className="home-image-section">
           <img src={BannerImage} alt="" />

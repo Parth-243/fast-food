@@ -15,15 +15,15 @@ const About = () => {
       <div className="about-section-text-container">
         <p className="primary-subheading">About</p>
         <h1 className="primary-heading">
-          Food Is An Important Part Of A Balanced Diet
+          Fast food: a delicious part of life, delivered hot and fresh!
         </h1>
         <p className="primary-text">
-          Lorem ipsum dolor sit amet consectetur. Non tincidunt magna non et
-          elit. Dolor turpis molestie dui magnis facilisis at fringilla quam.
+          Craving something tasty? Our fast food delivery brings options right
+          to your door. Enjoy the convenience and flavor with every order!
         </p>
         <p className="primary-text">
-          Non tincidunt magna non et elit. Dolor turpis molestie dui magnis
-          facilisis at fringilla quam.
+          Below is the YouTube link to our website. Learn how we deliver your
+          favorite fast food, right to your doorstep with just a few clicks!
         </p>
         <div className="about-buttons-container">
           <button className="secondary-button">Learn More</button>

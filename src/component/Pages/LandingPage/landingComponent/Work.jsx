@@ -7,18 +7,18 @@ const Work = () => {
   const workInfoData = [
     {
       image: PickMeals,
-      title: "Pick Meals",
-      text: "Lorem ipsum dolor sit amet consectetur. Maecenas orci et sagittis duis elementum interdum facilisi bibendum.",
+      title: "Fresh Meals",
+      text: "Enjoy fresh meals delivered fast to your doorstep, bringing you delicious convenience every time!",
     },
     {
       image: ChooseMeals,
       title: "Choose How Often",
-      text: "Lorem ipsum dolor sit amet consectetur. Maecenas orci et ",
+      text: "Choose how often you want fresh meals delivered. Enjoy delicious convenience on your terms! ",
     },
     {
       image: DeliveryMeals,
       title: "Fast Deliveries",
-      text: "Lorem ipsum dolor sit amet consectetur. Maecenas orci et lorem ipsum",
+      text: "Experience fast deliveries of your favorite meals, hot and fresh, straight to your doorstep.",
     },
   ];
   return (
@@ -27,8 +27,8 @@ const Work = () => {
         <p className="primary-subheading">Work</p>
         <h1 className="primary-heading">How It Works</h1>
         <p className="primary-text">
-          Lorem ipsum dolor sit amet consectetur. Non tincidunt magna non et
-          elit. Dolor turpis molestie dui magnis facilisis at fringilla quam.
+          place your order, and enjoy hot, fresh food delivered to your
+          doorstep. Quick, easy, and delicious!
         </p>
       </div>
       <div className="work-section-bottom">
