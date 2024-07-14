@@ -10,7 +10,6 @@ import LandingPages from "./component/Pages/LandingPage/LandingPages";
 import UserLogin from "./component/Pages/Login/UserLogin/UserLogin";
 import Login from "./component/Pages/Login/BusinessLogin/Login";
 import AdminLogin from "./component/Pages/Login/AdminLogin/AdminLogin";
-import FoodPage from "./component/Pages/FoodPages/FoodPage";
 import UserHome from "./component/Panels/UserPanel/User/UserHome";
 import RestaurantHome from "./component/Panels/BusinessPanel/RestaurantHome";
 import FoodMenuList from "./component/Panels/BusinessPanel/FoodMenu/FoodMenuList";
@@ -19,6 +18,10 @@ import UserProfile from "./component/Panels/UserPanel/UserProfile/UserProfile";
 import CartHistoryPage from "./component/Panels/UserPanel/UserAddToCart/CartHistoryPage";
 import OrderHistory from "./component/Panels/UserPanel/UserOrderHistory/OrderHistory";
 import BusinessProfile from "./component/Panels/BusinessPanel/BusinessProfile/BusinessProfile";
+import FastFood from "./component/Pages/FoodPages/FastFood";
+import Restaurant from "./component/Pages/RestaurantPage/Restaurant";
+import Admin from "./component/Panels/AdminPanel/Admin";
+// import AdminPannel from "./component/Panels/AdminPanel/AdminPannel";
 
 const App = () => {
   return (
@@ -35,8 +38,9 @@ const App = () => {
             <Route path="/login" element={<UserLogin />} />
             <Route path="/businessLogin" element={<Login />} />
             <Route path="/adminLogin" element={<AdminLogin />} />
+            <Route path="/fastFoodHome" element={<FastFood />} />
+            <Route path="/Resaturant" element={<Restaurant />} />
           </Route>
-          <Route path="/food" element={<FoodPage />} />
           <Route path="/userHomePage" element={<UserHome />} />
           <Route path="/restaurantPage" element={<RestaurantHome />} />
           <Route path="/foodMenuList" element={<FoodMenuList />} />
@@ -45,6 +49,7 @@ const App = () => {
           <Route path="/userCartHistory" element={<CartHistoryPage />} />
           <Route path="/userOrderHistory" element={<OrderHistory />} />
           <Route path="/businessProfile" element={<BusinessProfile />} />
+          <Route path="/adminHomePage" element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </>

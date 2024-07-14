@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./restaurantHeader.css";
 
 const RestaurantHeader = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-
   return (
     <header className="header">
       <div className="header-container">
