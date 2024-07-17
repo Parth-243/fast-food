@@ -1,0 +1,200 @@
+.restaurantFoodMenu {
+  font-family: "Arial", sans-serif;
+  margin: 20px;
+  padding: 20px;
+  padding-top: 5px;
+  margin-top: 0px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.SubrestaurantFoodMenu {
+  display: flex;
+  justify-content: space-around;
+  gap: 750px;
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+.restaurantName {
+  font-size: 2rem;
+  color: #333;
+  /* margin-bottom: 20px; */
+  text-align: center;
+}
+
+.createButton {
+  /* display: block;
+  margin: 0 auto 20px auto;*/
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background-color: #28a745;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.createButton:hover {
+  background-color: #218838;
+}
+
+.foodItemsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  /* justify-content: center; */
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.foodItem {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 300px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.foodImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.foodDetails {
+  padding: 15px;
+}
+
+.foodDetails h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.foodDetails p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 5px 0;
+}
+
+.editButton,
+.removeButton {
+  margin: 10px 5px;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.editButton {
+  background-color: #007bff;
+  color: white;
+}
+
+.editButton:hover {
+  background-color: #0056b3;
+}
+
+.removeButton {
+  background-color: #dc3545;
+  color: white;
+}
+
+.removeButton:hover {
+  background-color: #c82333;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90%;
+  overflow-y: auto;
+}
+
+.modalContent h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.formGroup input,
+.formGroup textarea,
+.formGroup select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.formGroup textarea {
+  resize: vertical;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 1rem;
+  color: white;
+  background-color: #28a745;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.submitButton:hover {
+  background-color: #218838;
+}
+
+.cancelButton {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 1rem;
+  color: white;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.cancelButton:hover {
+  background-color: #c82333;
+}

@@ -1,5 +1,6 @@
 // import React, { useState } from "react";
-// import "./FastFood.css";
+// import Style from "./UserFoodItem.module.css"; // Importing the CSS file with named import
+// import UserHeader from "../../../Layout/UserHeaders";
 
 // const foods = [
 //   {
@@ -53,7 +54,7 @@
 //   },
 // ];
 
-// function FastFood() {
+// function UserFoodItem() {
 //   const [filterPrice, setFilterPrice] = useState("");
 
 //   const handleFilterChange = (e) => {
@@ -64,49 +65,67 @@
 //     alert("To order please login/sign up");
 //   };
 
+//   const category = "Fast Food"; // Replace with dynamic category name
+
 //   const filteredFoods = foods.filter(
 //     (food) => !filterPrice || food.price <= parseInt(filterPrice)
 //   );
 
 //   return (
-//     <div className="fast-food-page">
-//       <div className="header">
-//         <h1>Fast Food</h1>
-//         <div className="filter">
-//           <label>Filter by Price: </label>
-//           <select onChange={handleFilterChange}>
-//             <option value="">All</option>
-//             <option value="100">Up to 100</option>
-//             <option value="200">Up to 200</option>
-//             <option value="300">Up to 300</option>
-//             <option value="400">Up to 400</option>
-//           </select>
+//     <>
+//       <UserHeader />
+//       <div className={Style["fast-food-page"]}>
+//         <div className={Style["header"]}>
+//           <h1>{category}</h1>
+//           <div className={Style["filter"]}>
+//             <label>Filter by Price: </label>
+//             <select onChange={handleFilterChange}>
+//               <option value="">All</option>
+//               <option value="100">Up to 100</option>
+//               <option value="200">Up to 200</option>
+//               <option value="300">Up to 300</option>
+//               <option value="400">Up to 400</option>
+//             </select>
+//           </div>
+//         </div>
+//         <div className={Style["food-container"]}>
+//           {filteredFoods.map((food, index) => (
+//             <div className={Style["food-card"]} key={index}>
+//               <img
+//                 src={food.image}
+//                 alt={food.name}
+//                 className={Style["food-image"]}
+//               />
+//               <div className={Style["food-details"]}>
+//                 <h2 className={Style["food-name"]}>{food.name}</h2>
+//                 <p className={Style["food-description"]}>{food.description}</p>
+//                 <p className={Style["restaurant-name"]}>
+//                   Restaurant: {food.restaurant}
+//                 </p>
+//                 <p className={Style["food-price"]}>Price: ₹{food.price}</p>
+//                 <div className={Style["button-container"]}>
+//                   <button
+//                     className={Style["order-button"]}
+//                     onClick={handleOrderClick}
+//                   >
+//                     Buy
+//                   </button>
+//                   <button className={Style["add-button"]}>Add</button>
+//                 </div>
+//               </div>
+//             </div>
+//           ))}
 //         </div>
 //       </div>
-//       <div className="food-container">
-//         {filteredFoods.map((food, index) => (
-//           <div className="food-card" key={index}>
-//             <img src={food.image} alt={food.name} className="food-image" />
-//             <div className="food-details">
-//               <h2 className="food-name">{food.name}</h2>
-//               <p className="food-description">{food.description}</p>
-//               <p className="restaurant-name">Restaurant: {food.restaurant}</p>
-//               <p className="food-price">Price: ₹{food.price}</p>
-//               <button className="order-button" onClick={handleOrderClick}>
-//                 Order Now
-//               </button>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
+//     </>
 //   );
 // }
 
-// export default FastFood;
+// export default UserFoodItem;
 
 import React, { useState } from "react";
-import Style from "./FastFood.module.css"; // Importing the CSS file with named import
+import Style from "./UserFoodItem.module.css"; // Importing the CSS file with named import
+import UserHeader from "../../../Layout/UserHeaders";
 
 const foods = [
   {
@@ -160,15 +179,32 @@ const foods = [
   },
 ];
 
-function FastFood() {
+function UserFoodItem() {
   const [filterPrice, setFilterPrice] = useState("");
+  const [selectedFood, setSelectedFood] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
   const handleFilterChange = (e) => {
     setFilterPrice(e.target.value);
   };
 
-  const handleOrderClick = () => {
-    alert("To order please login/sign up");
+  const handleOrderClick = (food) => {
+    setSelectedFood(food);
+  };
+
+  const handleQuantityChange = (increment) => {
+    setQuantity((prevQuantity) => Math.max(1, prevQuantity + increment));
+  };
+
+  const handleBuyNowClick = () => {
+    alert("Purchase successful!");
+    setSelectedFood(null);
+    setQuantity(1);
+  };
+
+  const handleCancelClick = () => {
+    setSelectedFood(null);
+    setQuantity(1);
   };
 
   const category = "Fast Food"; // Replace with dynamic category name
@@ -179,6 +215,7 @@ function FastFood() {
 
   return (
     <>
+      <UserHeader />
       <div className={Style["fast-food-page"]}>
         <div className={Style["header"]}>
           <h1>{category}</h1>
@@ -211,7 +248,7 @@ function FastFood() {
                 <div className={Style["button-container"]}>
                   <button
                     className={Style["order-button"]}
-                    onClick={handleOrderClick}
+                    onClick={() => handleOrderClick(food)}
                   >
                     Buy
                   </button>
@@ -221,9 +258,63 @@ function FastFood() {
             </div>
           ))}
         </div>
+        {selectedFood && (
+          <div className={Style["popup"]}>
+            <div className={Style["popup-content"]}>
+              <img
+                src={selectedFood.image}
+                alt={selectedFood.name}
+                className={Style["popup-image"]}
+              />
+              <div className={Style["popup-details"]}>
+                <h2 className={Style["popup-food-name"]}>
+                  {selectedFood.name}
+                </h2>
+                <p className={Style["popup-restaurant-name"]}>
+                  {selectedFood.restaurant}
+                </p>
+                <p className={Style["popup-restaurant-name"]}>
+                  {selectedFood.description}
+                </p>
+                <p className={Style["popup-food-price"]}>
+                  <b>Price:</b> ₹{selectedFood.price}
+                </p>
+                <div className={Style["quantity-control"]}>
+                  <button
+                    className={Style["quantity-button"]}
+                    onClick={() => handleQuantityChange(-1)}
+                  >
+                    -
+                  </button>
+                  <span className={Style["quantity"]}>{quantity}</span>
+                  <button
+                    className={Style["quantity-button"]}
+                    onClick={() => handleQuantityChange(1)}
+                  >
+                    +
+                  </button>
+                </div>
+                <div className={Style["popup-buttons"]}>
+                  <button
+                    className={Style["popup-buy-button"]}
+                    onClick={handleBuyNowClick}
+                  >
+                    Buy Now
+                  </button>
+                  <button
+                    className={Style["popup-cancel-button"]}
+                    onClick={handleCancelClick}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
 }
 
-export default FastFood;
+export default UserFoodItem;

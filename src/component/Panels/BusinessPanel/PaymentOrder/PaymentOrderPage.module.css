@@ -1,0 +1,99 @@
+.paymentOrderPage {
+  font-family: "Arial", sans-serif;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.restaurantSection {
+  margin-bottom: 40px;
+}
+
+.restaurantName {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.ordersTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #fff;
+}
+
+.ordersTable th,
+.ordersTable td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  vertical-align: top;
+}
+
+.ordersTable th {
+  background-color: #f5f5f5;
+  color: #333;
+  text-transform: uppercase;
+}
+
+.customerDetails,
+.foodDetails,
+.paymentStatus {
+  padding: 0;
+}
+
+.customerDetails table,
+.foodDetails table,
+.paymentStatus table {
+  width: 100%;
+}
+
+.customerDetails th,
+.foodDetails th,
+.paymentStatus th,
+.customerDetails td,
+.foodDetails td,
+.paymentStatus td {
+  border: none;
+  padding: 5px;
+}
+
+.profileImage,
+.foodImage {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+  object-fit: cover;
+}
+
+.paid {
+  color: green;
+}
+
+.notPaid {
+  color: red;
+}
+
+.pending {
+  color: blue;
+}
+
+@media (max-width: 768px) {
+  .ordersTable th,
+  .ordersTable td {
+    padding: 10px;
+  }
+
+  .profileImage,
+  .foodImage {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+}

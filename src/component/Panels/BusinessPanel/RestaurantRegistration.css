@@ -1,5 +1,3 @@
-/* RestaurantRegistration.css */
-
 .restaurant-registration-modal {
   position: fixed;
   top: 0;
@@ -78,21 +76,39 @@
   outline: none;
 }
 
-.restaurant-registration-modal-content .submit-button {
+.restaurant-registration-modal-content .form-buttons {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
+  margin-top: 10px;
+}
+
+.restaurant-registration-modal-content .submit-button,
+.restaurant-registration-modal-content .cancel-button {
+  width: 48%;
   padding: 10px 0;
   font-size: 1rem; /* Adjust button font size */
   color: white;
-  background-color: #ff5733;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-top: 10px;
+}
+
+.restaurant-registration-modal-content .submit-button {
+  background-color: #ff5733;
 }
 
 .restaurant-registration-modal-content .submit-button:hover {
-  background-color: #0056b3;
+  background-color: #e14a1e;
+}
+
+.restaurant-registration-modal-content .cancel-button {
+  background-color: #6c757d;
+}
+
+.restaurant-registration-modal-content .cancel-button:hover {
+  background-color: #5a6268;
 }
 
 /* Hide scrollbar */

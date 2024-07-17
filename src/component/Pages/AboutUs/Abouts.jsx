@@ -16,7 +16,7 @@ function Abouts() {
             delicious meals to customers' doorsteps. Enjoy convenience and
             quality with every order!
           </p>
-          <button className="impact-button">View Our Impact</button>
+          {/* <button className="impact-button">View Our Impact</button> */}
         </div>
         <div className="about-image">
           <img src="Eating-Fast-Food-.png" alt="Big Image" />

@@ -12,7 +12,7 @@ import Login from "./component/Pages/Login/BusinessLogin/Login";
 import AdminLogin from "./component/Pages/Login/AdminLogin/AdminLogin";
 import UserHome from "./component/Panels/UserPanel/User/UserHome";
 import RestaurantHome from "./component/Panels/BusinessPanel/RestaurantHome";
-import FoodMenuList from "./component/Panels/BusinessPanel/FoodMenu/FoodMenuList";
+// import FoodMenuList from "./component/Panels/BusinessPanel/FoodMenu/FoodMenuList";
 import FoodOrderingPage from "./component/Panels/UserPanel/UserFastFood/FoodOrderingPage";
 import UserProfile from "./component/Panels/UserPanel/UserProfile/UserProfile";
 import CartHistoryPage from "./component/Panels/UserPanel/UserAddToCart/CartHistoryPage";
@@ -22,6 +22,10 @@ import FastFood from "./component/Pages/FoodPages/FastFood";
 import Restaurant from "./component/Pages/RestaurantPage/Restaurant";
 import Admin from "./component/Panels/AdminPanel/Admin";
 import RestaurantMenu from "./component/Panels/BusinessPanel/RestaurantMenu";
+import UserFoodItem from "./component/Panels/UserPanel/UserFoodItemPage/UserFoodItem";
+import UserRestaurantPage from "./component/Panels/UserPanel/UserRestaurantPage/UserRestaurantPage";
+import RestaurantFoodMenu from "./component/Panels/BusinessPanel/RestaurantFoodMenu/RestaurantFoodMenu";
+import PaymentOrderPage from "./component/Panels/BusinessPanel/PaymentOrder/PaymentOrderPage";
 // import AdminPannel from "./component/Panels/AdminPanel/AdminPannel";
 
 const App = () => {
@@ -45,13 +49,17 @@ const App = () => {
           <Route path="/userHomePage" element={<UserHome />} />
           <Route path="/restaurantPage" element={<RestaurantHome />} />
           <Route path="/restaurant/:id" element={<RestaurantMenu />} />
-          <Route path="/foodMenuList" element={<FoodMenuList />} />
+          {/* <Route path="/foodMenuList" element={<FoodMenuList />} /> */}
           <Route path="/fastFood" element={<FoodOrderingPage />} />
           <Route path="/userProfile" element={<UserProfile />} />
           <Route path="/userCartHistory" element={<CartHistoryPage />} />
           <Route path="/userOrderHistory" element={<OrderHistory />} />
           <Route path="/businessProfile" element={<BusinessProfile />} />
           <Route path="/adminHomePage" element={<Admin />} />
+          <Route path="/UserfooditemPage" element={<UserFoodItem />} />
+          <Route path="/userRestaurantPage" element={<UserRestaurantPage />} />
+          <Route path="/RestaurantFoodMenu" element={<RestaurantFoodMenu />} />
+          <Route path="/PaymentOrderPage" element={<PaymentOrderPage />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -9,10 +9,13 @@ const RestaurantHeader = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch("http://localhost:4000/business/auth/user", {
-          method: "GET",
-          credentials: "include", // Ensure cookies are included in the request
-        });
+        const response = await fetch(
+          "http://localhost:4000/business/auth/user",
+          {
+            method: "GET",
+            credentials: "include", // Ensure cookies are included in the request
+          }
+        );
 
         if (response.status === 401) {
           navigate("/businessLogin");
@@ -35,10 +38,13 @@ const RestaurantHeader = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://localhost:4000/business/auth/logout", {
-        method: "POST",
-        credentials: "include", // Ensure cookies are included in the request
-      });
+      const response = await fetch(
+        "http://localhost:4000/business/auth/logout",
+        {
+          method: "POST",
+          credentials: "include", // Ensure cookies are included in the request
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to log out");
@@ -55,12 +61,12 @@ const RestaurantHeader = () => {
     <header className="header">
       <div className="header-container">
         <div className="logo">
-          <Link to="/">FoodExpress</Link>
+          <Link to="/restaurantPage">FoodExpress</Link>
         </div>
         <nav className="nav-links">
           <Link to="/restaurantPage">Home</Link>
-          <Link to="/foodMenuList">Food Menu</Link>
-          <Link to="">Payment</Link>
+          <Link to="/RestaurantFoodMenu">Food Menu</Link>
+          <Link to="/PaymentOrderPage">Payment</Link>
           {user ? (
             <>
               <Link to="/businessProfile">{user.username}</Link>

@@ -1,152 +1,93 @@
-/* .profile-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #f06, #ffb600);
-  }
-  
-  .profile-card {
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    width: 500px;
-    overflow: hidden;
-  }
-  
-  .profile-header {
-    background: linear-gradient(135deg, #f06, #ffb600);
-    text-align: center;
-    padding: 20px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .profile-picture {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 5px solid #fff;
-    object-fit: cover;
-    margin-right: 20px;
-  }
-  
-  .file-input {
-    cursor: pointer;
-  }
-  
-  .profile-form {
-    padding: 20px;
-  }
-  
-  .profile-form label {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  .profile-form input,
-  .profile-form textarea {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .profile-form button {
-    background: linear-gradient(135deg, #f06, #ffb600);
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  .profile-form button:hover {
-    background: linear-gradient(135deg, #ffb600, #f06);
-  }
-   */
 /* UserProfile.css */
 
+/* Container for the entire profile page */
 .profile-page {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  /* background: linear-gradient(135deg, #f06, #ffb600); */
+  /* height: 100vh; */
+  background-color: #f0f0f0;
+  padding-top: 20px;
+  margin: -20px;
+}
+
+/* Profile card styling */
+.profile-card-container {
+  width: 80%;
+  max-width: 600px;
+  overflow: hidden; /* Hide overflow for slider effect */
+  position: relative; /* Positioning for absolute slide positioning */
+}
+
+.profile-card-slider {
+  display: flex; /* Flexbox for horizontal sliding */
+  transition: transform 0.3s ease; /* Smooth sliding animation */
 }
 
 .profile-card {
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  width: 600px; /* Increased width */
-  max-width: 90%;
-  overflow: hidden;
+  flex: 0 0 50%; /* Each slide takes up 50% width */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease; /* Smooth sliding animation for card */
 }
 
+/* Profile header with profile picture and file input */
 .profile-header {
-  background: linear-gradient(135deg, #f06, #ffb600);
-  text-align: center;
-  padding: 20px;
-  position: relative;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .profile-picture {
-  width: 100px; /* Adjusted size */
-  height: 100px; /* Adjusted size */
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  border: 3px solid #fff;
   object-fit: cover;
-  margin-right: 20px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .file-input {
-  cursor: pointer;
+  margin-top: 10px;
 }
 
+/* Profile form styling */
 .profile-form {
-  padding: 20px;
-  height: 400px; /* Increased height */
-  overflow-y: auto; /* Enable scroll if content exceeds height */
-}
-
-.profile-form::-webkit-scrollbar {
-  width: 0; /* Hide scrollbar for Chrome, Safari, and Opera */
+  display: grid;
+  grid-gap: 20px;
 }
 
 .profile-form label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 8px;
 }
 
 .profile-form input,
+.profile-form select,
 .profile-form textarea {
-  width: calc(100% - 20px);
-  padding: 10px;
-  margin: 5px 0;
+  width: calc(100% - 16px);
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 14px;
 }
 
 .profile-form button {
-  background: linear-gradient(135deg, #f06, #ffb600);
+  padding: 10px 20px;
+  background-color: #3498db;
   color: #fff;
   border: none;
-  border-radius: 20px;
-  padding: 12px 24px; /* Adjusted padding */
+  border-radius: 4px;
   cursor: pointer;
-  width: 100%;
-  margin-top: 20px; /* Adjusted margin */
+  transition: background-color 0.3s ease;
 }
 
 .profile-form button:hover {
-  background: linear-gradient(135deg, #ffb600, #f06);
+  background-color: #2980b9;
 }

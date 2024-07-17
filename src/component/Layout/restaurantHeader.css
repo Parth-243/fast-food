@@ -118,13 +118,20 @@
 .logout-button {
   background: none;
   border: none;
-  color: blue;
+  color: rgb(251, 251, 255);
   cursor: pointer;
   padding: 0;
   font-size: 1rem;
-  text-decoration: underline;
+  margin-left: 60px;
+  padding: 8px 12px;
 }
 
 .logout-button:hover {
-  color: darkblue;
+  text-decoration: none;
+  color: #ececec;
+  font-size: 1rem;
+  padding: 8px 12px;
+  border-radius: 5px;
+  background-color: #fa2a05;
+  transition: background-color 0.3s, color 0.3s;
 }

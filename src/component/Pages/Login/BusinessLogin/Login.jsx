@@ -55,8 +55,8 @@ const Login = () => {
         <div className="login-image-section">
           <img src={userLogin} alt="Pizza" className="login-image" />
           <div className="login-image-text">
-            <h2>Need some Pizza, yo?</h2>
-            <p>C'mon and order from nearby Restaurants</p>
+            <h2>Want to Start Your Business?</h2>
+            <p>C'mon and Login your Restaurants</p>
           </div>
         </div>
         <div className="login-form-section">

@@ -1,132 +1,138 @@
-/* General styles */
+/* Scoped CSS for UserHome */
+
 body {
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-family: "Roboto", sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
-  color: #333;
+  background-color: #f5f5f5;
 }
 
-.food-page {
-  padding: 40px 20px;
-  background: url("../../../img/vender.jpg") no-repeat center center fixed;
-  background-size: cover;
-  min-height: 100vh;
-  backdrop-filter: blur(5px); /* Add a slight blur to the background image */
+.user-home-container {
+  width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* User info section */
 .user-info {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
-  background-color: rgba(255, 85, 0, 0.553);
-  padding: 15px 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px 0;
+  border-bottom: 2px solid #e0e0e0;
 }
-
+.user-name-box {
+  width: 200px;
+}
 .user-name-box h2 {
-  margin: 0;
-  margin-right: 20px;
-  font-size: 24px;
-  color: #fff;
+  font-size: 2.6em;
+  color: #ff3e20;
+  max-width: 400px;
+  text-shadow: 3px 3px 5px rgba(141, 141, 141, 0.65);
+  font-weight: bolder;
+  text-align: left;
+  position: relative;
+  left: 144px;
 }
-
+.user-img-box {
+  display: flex;
+  justify-content: end;
+  position: relative;
+  right: 100px;
+}
 .user-img-box img {
-  width: 60px;
-  height: 60px;
+  width: 21%;
+  /* height: 100px; */
   border-radius: 50%;
-  border: 2px solid #ddd;
+  border: 2px solid #e0e0e0;
 }
 
-/* Sections */
-.foods-section,
-.restaurants-section {
+.sections-container {
   margin-top: 30px;
 }
 
-.foods-section h2,
-.restaurants-section h2 {
-  background-color: rgb(255, 149, 0);
-  padding: 10px 15px;
-  border-radius: 5px;
-  font-size: 28px;
-  color: #fff;
+.sections-container h2 {
+  font-size: 1.5em;
+  color: #444;
+  margin-bottom: 35px;
+  margin-top: 35px;
+}
+#Restaurant-heading {
+  margin-bottom: 80px;
 }
 
-.food-items,
-.restaurant-items {
-  display: flex;
-  flex-wrap: wrap;
-  /* gap: 20px; */
-  justify-content: space-between;
-  margin-top: 10px;
+.user-food-items,
+.user-restaurant-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
 }
 
-.food-item,
-.restaurant-item {
-  background-color: rgba(255, 255, 255, 0.772);
-  border: 1px solid #ddd;
+.user-food-item,
+.user-restaurant-item {
+  background-color: #ffffff;
   border-radius: 10px;
-  padding: 15px;
-  width: calc(25% - 20px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.food-item:hover,
-.restaurant-item:hover {
+.user-food-item:hover,
+.user-restaurant-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.food-item img,
-.restaurant-item img {
+.user-food-item img,
+.user-restaurant-item img {
   width: 100%;
-  border-radius: 10px;
-  margin-bottom: 10px;
+  height: 150px;
+  object-fit: cover;
 }
 
-.food-item p,
-.restaurant-item p {
+.food-info,
+.restaurant-info {
+  padding: 15px;
+}
+
+.food-name,
+.restaurant-name {
+  font-size: 1.2em;
+  color: #333;
   margin: 5px 0;
-  text-align: center;
-  font-size: 16px;
-  color: #666;
 }
 
-/* Links in header */
-.header .nav-links a {
-  color: white;
-  text-decoration: none;
-  margin-left: 20px;
-  font-size: 18px;
-}
-
-.header .nav-links a:hover {
-  text-decoration: underline;
-}
-
-/* Media queries for responsiveness */
-@media (max-width: 1200px) {
-  .food-item,
-  .restaurant-item {
-    width: calc(33.333% - 20px);
-  }
+.restaurant-location,
+.food-price {
+  font-size: 1em;
+  color: #777;
 }
 
 @media (max-width: 768px) {
-  .food-item,
-  .restaurant-item {
-    width: calc(50% - 20px);
+  .user-home-container {
+    width: 95%;
+  }
+
+  .user-info {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .user-img-box {
+    margin-top: 10px;
+  }
+
+  .user-food-items,
+  .user-restaurant-items {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
 }
 
 @media (max-width: 480px) {
-  .food-item,
-  .restaurant-item {
-    width: 100%;
+  .user-food-items,
+  .user-restaurant-items {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
   }
 }

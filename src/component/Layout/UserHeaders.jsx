@@ -54,12 +54,12 @@ const UserHeader = () => {
     <header className="header">
       <div className="header-container">
         <div className="logo">
-          <Link to="/">FoodExpress</Link>
+          <Link to="/userHomePage">FoodExpress</Link>
         </div>
         <nav className="nav-links">
           <Link to="/userHomePage">Home</Link>
-          <Link to="/fastFood">Fast Food</Link>
-          <Link to="/userCartHistory">Card</Link>
+          <Link to="/fastFood">Food</Link>
+          <Link to="/userCartHistory">Cart</Link>
           <Link to="/userOrderHistory">Order</Link>
           {user ? (
             <>

@@ -120,6 +120,7 @@ const SignUpForm = () => {
     const email = form.email.value;
     const username = form.fullName.value;
     const password = form.password.value;
+    const confirmPassword = form.confirmPassword.value;
     const role = form.role.value;
 
     try {
@@ -130,7 +131,13 @@ const SignUpForm = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ fullName: username, email, password, role }),
+          body: JSON.stringify({
+            username,
+            email,
+            password,
+            confirmPassword,
+            role,
+          }),
         }
       );
 
@@ -189,6 +196,16 @@ const SignUpForm = () => {
                 id="password"
                 name="password"
                 placeholder="Enter Your Password"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Re-enter Your Password"
                 required
               />
             </div>

@@ -109,6 +109,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
 }
 .secondary-button svg {
   margin-left: 0.75rem;

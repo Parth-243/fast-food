@@ -1,76 +1,52 @@
-.restaurant-page {
+/* Basic page styling */
+.restaurantPage {
   font-family: "Arial", sans-serif;
-  background-color: #f5f5f5;
+  background-color: #f9f9f9;
   margin: 0;
-  padding: 0;
-  background-image: url("../../img/vecteezy_vegetarian-fast-food-restaurant-with-colorful_30655121.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  padding: 20px;
 }
 
-.restaurant-home {
-  max-width: 600px;
-  margin: 50px auto;
+/* User info section */
+.userInfo {
+  display: flex;
+  align-items: center;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.title {
-  font-size: 2.5em;
-  color: #333;
   margin-bottom: 20px;
 }
 
-.food-menu-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.userPhoto {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-label {
-  font-size: 1.1em;
-  margin-bottom: 5px;
-  color: #555;
-}
-
-input[type="text"],
-input[type="file"],
-input[type="number"],
-textarea,
-select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1em;
-}
-
-textarea {
-  resize: vertical;
-}
-
-input[type="text"]:focus,
-input[type="file"]:focus,
-input[type="number"]:focus,
-textarea:focus,
-select:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-.submit-button {
-  padding: 10px 20px;
+.userName {
   font-size: 1.2em;
+  color: #333;
+}
+
+/* Heading and register button */
+.headingContainer {
+  display: flex;
+  justify-content: space-around;
+  gap: 635px;
+  align-items: center;
+  margin-bottom: 80px;
+  margin-top: 40px;
+}
+
+.heading {
+  font-size: 2em;
+  color: #333;
+}
+
+.registerButton {
+  padding: 10px 20px;
+  font-size: 1em;
   color: white;
   background-color: #ff5733;
   border: none;
@@ -79,33 +55,20 @@ select:focus {
   transition: background-color 0.3s;
 }
 
-.submit-button:hover {
-  background-color: #0056b3;
+.registerButton:hover {
+  background-color: #e14a1e;
 }
 
-/* Ensure your existing styles, and add modal styles if necessary */
-
-.restaurant-page {
-  font-family: "Arial", sans-serif;
-  background-color: #f5f5f5;
-  margin: 0;
-  padding: 0;
-  background-image: url("../../img/vecteezy_vegetarian-fast-food-restaurant-with-colorful_30655121.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
-.restaurant-tiles {
+/* Restaurant grid */
+.restaurantGrid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  padding: 20px;
 }
 
-.restaurant-tile {
-  background-color: rgba(255, 255, 255, 0.9);
+.restaurantCard {
+  background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -114,73 +77,68 @@ select:focus {
   width: 300px;
 }
 
-.restaurant-tile:hover {
+.restaurantCard:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.restaurant-image {
+.restaurantImage {
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
 
-.restaurant-info {
+.restaurantInfo {
   padding: 15px;
   text-align: center;
 }
 
-.restaurant-name {
+.restaurantName {
   font-size: 1.5em;
   color: #333;
   margin: 0 0 10px;
 }
 
-.restaurant-description {
+.restaurantDescription {
   font-size: 1em;
   color: #666;
 }
 
-/* Restaurant Menu CSS */
-.menu-page {
-  font-family: "Arial", sans-serif;
-  background-color: #f5f5f5;
-  padding: 20px;
-}
-
-.menu-list {
+/* Modal styles */
+.modal {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
-}
-
-.menu-item {
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  width: 300px;
-}
-
-.menu-image {
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-.menu-info {
-  padding: 15px;
-  text-align: center;
+.modalContent {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 10px;
 }
 
-.menu-name {
-  font-size: 1.5em;
-  color: #333;
-  margin: 0 0 10px;
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
-.menu-price {
-  font-size: 1em;
-  color: #666;
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }

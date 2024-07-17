@@ -12,6 +12,8 @@
   justify-content: space-around;
   gap: 100px;
   margin-bottom: 40px;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 20px;
 }
 
 .quotes {
@@ -43,6 +45,7 @@
   justify-content: center;
   gap: 20px;
   /* padding: 10px 0; */
+  border-bottom: 2px solid #e0e0e0;
 }
 
 .food-category {
@@ -50,7 +53,7 @@
   text-align: center;
 }
 
-.food-image {
+.food-images {
   width: 100px;
   height: 100px;
   border-radius: 10px;
@@ -102,6 +105,7 @@ h2 {
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  margin-top: 50px;
 }
 
 .restaurant-card {
