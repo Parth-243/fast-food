@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./RestaurantRegistration.css";
 
-const RestaurantRegistration = ({ onSubmit, onCancel }) => {
-  const [restaurantName, setRestaurantName] = useState("");
-  const [description, setDescription] = useState("");
-  const [address, setAddress] = useState("");
-  const [phoneNo, setPhoneNo] = useState("");
-  const [openingTime, setOpeningTime] = useState("");
-  const [closingTime, setClosingTime] = useState("");
-  const [state, setState] = useState("");
-  const [city, setCity] = useState("");
-  const [pincode, setPincode] = useState("");
+const RestaurantRegistration = ({ onSubmit, onCancel, initialValues }) => {
+  const [restaurantName, setRestaurantName] = useState(
+    initialValues?.name || ""
+  );
+  const [description, setDescription] = useState(
+    initialValues?.description || ""
+  );
+  const [address, setAddress] = useState(initialValues?.address || "");
+  const [phoneNo, setPhoneNo] = useState(initialValues?.mobile || "");
+  const [openingTime, setOpeningTime] = useState(initialValues?.opensAt || "");
+  const [closingTime, setClosingTime] = useState(initialValues?.closesAt || "");
+  const [state, setState] = useState(initialValues?.state || "");
+  const [city, setCity] = useState(initialValues?.city || "");
+  const [pincode, setPincode] = useState(initialValues?.postalCode || "");
   const [restaurantImage, setRestaurantImage] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -29,29 +33,41 @@ const RestaurantRegistration = ({ onSubmit, onCancel }) => {
     };
 
     try {
-      // POST restaurant information
-      const response = await fetch(
-        "http://localhost:4000/business/restaurant",
-        {
+      // POST or PUT restaurant information based on initialValues presence
+      let response;
+      if (initialValues) {
+        // Perform PUT request for updating existing restaurant
+        response = await fetch(
+          `http://localhost:4000/business/restaurant/${initialValues._id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify(restaurantData),
+          }
+        );
+      } else {
+        // Perform POST request for registering new restaurant
+        response = await fetch("http://localhost:4000/business/restaurant", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           credentials: "include",
-
           body: JSON.stringify(restaurantData),
-          // redirect: "follow",
-        }
-      );
+        });
+      }
 
       if (!response.ok) {
-        throw new Error("Failed to register restaurant");
+        throw new Error("Failed to register/update restaurant");
       }
 
       const result = await response.json();
-      console.log("Restaurant registered:", result);
+      console.log("Restaurant registered/updated:", result);
 
-      // POST restaurant image
+      // POST restaurant image if provided
       if (restaurantImage) {
         const formData = new FormData();
         formData.append("file", restaurantImage);
@@ -88,17 +104,17 @@ const RestaurantRegistration = ({ onSubmit, onCancel }) => {
       setPincode("");
       setRestaurantImage(null);
 
-      // Call the onSubmit callback with the new restaurant data
-      // onSubmit(result);
+      // Call the onSubmit callback with the new or updated restaurant data
+      onSubmit(result);
     } catch (error) {
-      console.error("Error registering restaurant:", error);
+      console.error("Error registering/updating restaurant:", error);
     }
   };
 
   return (
     <div className="restaurant-registration-modal">
       <div className="restaurant-registration-modal-content">
-        <h2>Restaurant Registration</h2>
+        <h2>{initialValues ? "Edit Restaurant" : "Register Restaurant"}</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="restaurantName">Restaurant Name</label>
@@ -196,12 +212,12 @@ const RestaurantRegistration = ({ onSubmit, onCancel }) => {
               type="file"
               id="restaurantImage"
               onChange={(e) => setRestaurantImage(e.target.files[0])}
-              required
+              required={!initialValues} // Require image upload for new registration
             />
           </div>
           <div className="form-buttons">
             <button type="submit" className="submit-button">
-              Register Restaurant
+              {initialValues ? "Update Restaurant" : "Register Restaurant"}
             </button>
             <button type="button" className="cancel-button" onClick={onCancel}>
               Cancel
