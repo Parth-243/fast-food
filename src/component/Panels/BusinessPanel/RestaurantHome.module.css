@@ -142,3 +142,32 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+/* Button for edit and more*/
+.editButton,
+.moreButton {
+  margin: 10px 5px;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.editButton {
+  background-color: #007bff;
+  color: white;
+}
+
+.editButton:hover {
+  background-color: #0056b3;
+}
+
+.moreButton {
+  background-color: rgb(255, 174, 0);
+  color: white;
+}
+
+.moreButton:hover {
+  background-color: #c82333;
+}
