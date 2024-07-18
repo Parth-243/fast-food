@@ -145,7 +145,8 @@
 
 /* Button for edit and more*/
 .editButton,
-.moreButton {
+.moreButton,
+.removeButton {
   margin: 10px 5px;
   padding: 5px 10px;
   font-size: 0.9rem;
@@ -169,5 +170,13 @@
 }
 
 .moreButton:hover {
+  background-color: #c8ac23;
+}
+.removeButton {
+  background-color: rgb(255, 4, 0);
+  color: white;
+}
+
+.removeButton:hover {
   background-color: #c82333;
 }

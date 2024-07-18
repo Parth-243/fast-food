@@ -9,6 +9,7 @@
 //   const [loading, setLoading] = useState(true);
 //   const [showRegistration, setShowRegistration] = useState(false);
 //   const [user, setUser] = useState(null); // State for storing user information
+//   const [editRestaurant, setEditRestaurant] = useState(null); // State for storing restaurant to edit
 //   const navigate = useNavigate();
 
 //   useEffect(() => {
@@ -75,17 +76,19 @@
 //     // Handle registration form submission here
 //     console.log(restaurantData);
 //     setShowRegistration(false); // Close the modal after submission
+//     setEditRestaurant(null); // Reset editRestaurant state
 //   };
 
 //   const handleCancel = () => {
 //     setShowRegistration(false);
+//     setEditRestaurant(null); // Reset editRestaurant state
 //   };
 
-//   const handleEditRestaurant = (restaurantId) => {
+//   const handleEditRestaurant = (restaurant) => {
 //     // Handle edit restaurant action
-//     console.log("Edit restaurant:", restaurantId);
-//     // Navigate to edit page or perform desired action
-//     navigate(`/restaurant/${restaurantId}`);
+//     console.log("Edit restaurant:", restaurant._id);
+//     setEditRestaurant(restaurant);
+//     setShowRegistration(true);
 //   };
 
 //   const handleViewMenu = (restaurantId) => {
@@ -142,7 +145,7 @@
 //                   <div className={styles.buttonContainer}>
 //                     <button
 //                       className={styles.editButton}
-//                       onClick={() => setShowRegistration(true)}
+//                       onClick={() => handleEditRestaurant(restaurant)}
 //                     >
 //                       Edit
 //                     </button>
@@ -163,7 +166,7 @@
 //           <RestaurantRegistration
 //             onSubmit={handleRegistrationSubmit}
 //             onCancel={handleCancel}
-//             initialValues={handleRegistrationSubmit}
+//             initialValues={editRestaurant}
 //           />
 //         )}
 //       </div>
@@ -273,6 +276,32 @@ const RestaurantHome = () => {
     navigate(`/RestaurantFoodMenu`);
   };
 
+  const handleRemoveRestaurant = async (restaurantId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:4000/business/restaurant/${restaurantId}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        }
+      );
+
+      if (response.status === 401) {
+        navigate("/businessLogin");
+      }
+
+      if (!response.ok) {
+        throw new Error("Failed to delete restaurant");
+      }
+
+      setRestaurants((prevRestaurants) =>
+        prevRestaurants.filter((restaurant) => restaurant._id !== restaurantId)
+      );
+    } catch (error) {
+      console.error("Error deleting restaurant:", error);
+    }
+  };
+
   return (
     <>
       <RestaurantHeader />
@@ -329,6 +358,12 @@ const RestaurantHome = () => {
                       onClick={() => handleViewMenu(restaurant._id)}
                     >
                       More
+                    </button>
+                    <button
+                      className={styles.removeButton}
+                      onClick={() => handleRemoveRestaurant(restaurant._id)}
+                    >
+                      Remove
                     </button>
                   </div>
                 </div>
